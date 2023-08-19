@@ -46,7 +46,7 @@ class TestDeudaTarjetaCredito(unittest.TestCase):
     def test_calcular_efecto_abono_extra_caso_normal(self):
         tarjeta_credito = DeudaTarjetaCredito(200000, 3.1, 36)
         plan_con_abono = tarjeta_credito.calcular_efecto_abono_extra(53000, 10)
-        self.assertAlmostEqual(plan_con_abono[9][2], 253000.00, places=2)
+        self.assertAlmostEqual(plan_con_abono[9][2], 43702.04, places=2)
 
     def test_calcular_efecto_abono_extra_error_bajo(self):
         tarjeta_credito = DeudaTarjetaCredito(850000, 3.4, 24)
