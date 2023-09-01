@@ -1,25 +1,25 @@
 
 from Pago import DeudaTarjetaCredito
 
-print("Este programa le permite calcular la cuota a pagar por una compra con tarjeta de credito")
-monto_compra = float( input("Monto de la compra:") )
-tasa_interes = float( input("Tasa de interés de la tarjeta:") )
-num_cuotas = int( input("Numero de cuotas en que va a diferir la compra:") )
+print("This program allows you to calculate the fee to be paid for a credit card purchase")
+amount = float( input("Purchase amount:") )
+interest = float( input("Card interest rate:") )
+payment = int(input("Numero de cuotas en que va a diferir la compra:"))
 
-deuda = DeudaTarjetaCredito(monto_compra, tasa_interes, num_cuotas)
+deuda = DeudaTarjetaCredito(amount, interest, payment)
 
-print("Cuota mensual:", deuda.cuota_mensual)
-print("Intereses totales a pagar:", deuda.calcular_intereses_totales())
+print("Cuota mensual:", deuda.monthly_payment)
+print("Intereses totales a pagar:", deuda.calculate_monthly_payment())
 
-plan_amortizacion = deuda.calcular_plan_amortizacion()
+plan_amortizacion = deuda.calculate_amortization_plan()
 print("\nPlan de amortización:")
-for cuota, interes, principal, saldo in plan_amortizacion:
-    print(f"Cuota: {cuota:.2f} | Interés: {interes:.2f} | Principal: {principal:.2f} | Saldo restante: {saldo:.2f}")
+for monthly_payment, interest_payment, main_payment, remaining_fund in plan_amortizacion:
+    print(f"Cuota: {monthly_payment:.2f} | Interés: {interest_payment:.2f} | Principal: {main_payment:.2f} | Saldo restante: {remaining_fund:.2f}")
 
 num_cuota_abono = int(input("\nIngrese el número de cuota para abonar extra: "))
 monto_abono = float(input("Ingrese el monto a abonar extra: "))
-plan_con_abono = deuda.calcular_efecto_abono_extra(monto_abono, num_cuota_abono)
+plan_with_extra = deuda.calculate_extra_payment(monto_abono, num_cuota_abono)
 
 print("\nPlan de amortización con abono extra:")
-for cuota, interes, principal, saldo in plan_con_abono:
-    print(f"Cuota: {cuota:.2f} | Interés: {interes:.2f} | Principal: {principal:.2f} | Saldo restante: {saldo:.2f}")
+for monthly_payment, interest_payment, main_payment, remaining_fund in plan_with_extra:
+    print(f"Cuota: {monthly_payment:.2f} | Interés: {interest_payment:.2f} | Principal: {main_payment:.2f} | Saldo restante: {remaining_fund:.2f}")
