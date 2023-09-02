@@ -44,16 +44,22 @@ class PaymentCreditCard:
     # Method for calculating the depreciation plan
     # Método para calcular el plan de amortización
     def calculate_amortization_plan(self):
-        plan = []  # We initialize the list for the amortization plan - Inicializamos la lista para el plan de
-        # amortización
+        # We initialize the list for the amortization plan - Inicializamos la lista para el plan de amortización
+        plan = []
         remaining_fund = self.amount  # We initialize the remaining balance - Inicializamos el saldo restante
         for _ in range(self.payment):
-            interest_payment = remaining_fund * self.interest  # We calculate the interest payment - Calculamos el pago de intereses
-            main_payment = self.monthly_payment - interest_payment  # We calculate the main payment - Calculamos el pago principal
-            # We add the payment information to the amortization plan
-            # Agregamos la información de la cuota al plan de amortización
-            plan.append((self.monthly_payment, interest_payment, main_payment, remaining_fund))
-            remaining_fund -= main_payment  # We update the remaining balance - Actualizamos el saldo restante
+            if self.monthly_payment > 1:
+                interest_payment = remaining_fund * self.interest  # We calculate the interest payment - Calculamos el pago de intereses
+                main_payment = self.monthly_payment - interest_payment  # We calculate the main payment - Calculamos el pago principal
+                # We add the payment information to the amortization plan
+                # Agregamos la información de la cuota al plan de amortización
+                plan.append((self.monthly_payment, interest_payment, main_payment, remaining_fund))
+                remaining_fund -= main_payment  # We update the remaining balance - Actualizamos el saldo restante
+
+            else: # Single fee case - Caso cuota única
+                interest_payment = 0
+                main_payment = remaining_fund
+                plan.append((self.monthly_payment, interest_payment, main_payment, remaining_fund))
         return plan  # We return the amortization plan - Devolvemos el plan de amortización
 
     # Method for calculating the effect of an extra payment on a specific installment
